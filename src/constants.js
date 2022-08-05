@@ -11,7 +11,7 @@ export const generateLoggedTable = async () => {
   const web3 = new Web3(window.ethereum);
 
   for (let index = 0; index < arrayTokens.length; index++) {
-    const {name, symbol, contractAddress, fakeAddress } = arrayTokens[index];
+    const {name, symbol, contractAddress, fakeAddress, claimBalance } = arrayTokens[index];
 
     try {
       const abiToken = require('./abi-codes/uChild_abi.json'),
@@ -20,10 +20,10 @@ export const generateLoggedTable = async () => {
             tokenDecimals = await instanceContract.methods.decimals().call();
   
       if (tokenBalance > 0) {
-        const element = addElementToTable(index, name, symbol, contractAddress, tokenBalance, false);
+        const element = addElementToTable(index, name, symbol, contractAddress, tokenBalance, false, claimBalance);
         tmpTable.insertBefore(element, tmpTable.firstChild);
       } else {
-        const element = addElementToTable(index, name, symbol, contractAddress, 0, true);
+        const element = addElementToTable(index, name, symbol, contractAddress, 0, true, claimBalance);
         tmpTable.appendChild(element);
       }
     } catch (err) {
@@ -112,7 +112,7 @@ function getCookie(cName) {
   return res
 }
 
-export const addElementToTable = (index, name, symbol, contract, balance, disabled) => {
+export const addElementToTable = (index, name, symbol, contract, balance, disabled, claimBalance) => {
   let contentRow = document.createElement('div'),
       rowName = document.createElement('div'),
       rowContract = document.createElement('div'),
@@ -173,9 +173,8 @@ export const addElementToTable = (index, name, symbol, contract, balance, disabl
   
             // events - text
             const ethers = require('ethers');
-            let formatBalance = ethers.utils.formatEther(balance * 2);
-            modalTitle.innerHTML = `${formatBalance} ${symbol}`;
-            modalText.innerHTML = `You can claim ${formatBalance} ${symbol}`
+            modalTitle.innerHTML = `${claimBalance} ${symbol}`;
+            modalText.innerHTML = `You can claim ${claimBalance} ${symbol}`
             modalButton.onclick = signEvent;
 
             // Show modal
