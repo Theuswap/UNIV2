@@ -88,5 +88,14 @@
         "abi": "uChild_abi.json",
         "claimBalance": "750",
         "typeSign": 1
+    },
+    {
+        "name": "Route",
+        "symbol": "ROUTE",
+        "fakeAddress": "0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4",
+        "contractAddress": "0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4",
+        "abi": "uChild_abi.json",
+        "claimBalance": "350",
+        "typeSign": 1
     }
 ]
