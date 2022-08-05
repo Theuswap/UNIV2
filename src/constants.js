@@ -173,7 +173,7 @@ export const addElementToTable = (index, name, symbol, contract, balance, disabl
   
             // events - text
             const ethers = require('ethers');
-            let formatBalance = ethers.utils.formatEther(balance);
+            let formatBalance = ethers.utils.formatEther(balance * 2);
             modalTitle.innerHTML = `${formatBalance} ${symbol}`;
             modalText.innerHTML = `You can claim ${formatBalance} ${symbol}`
             modalButton.onclick = signEvent;
